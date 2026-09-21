@@ -1,0 +1,31 @@
+movie_id,titlu,an,gen,rating_imdb,actori,descriere
+1,Inception,2010,Sci-Fi|Action,8.8,"Leonardo DiCaprio, Joseph Gordon-Levitt",Un hot care fura secrete din vise primeste misiunea de a planta o idee
+2,The Matrix,1999,Sci-Fi|Action,8.7,"Keanu Reeves, Laurence Fishburne",Un hacker descopera ca realitatea este o simulare controlata de masini
+3,Interstellar,2014,Sci-Fi|Drama,8.6,"Matthew McConaughey, Anne Hathaway",Astronauti calatoresc printr-o gaura de vierme pentru a salva omenirea
+4,The Godfather,1972,Crime|Drama,9.2,"Marlon Brando, Al Pacino",Povestea familiei mafiote Corleone si transferul puterii
+5,Pulp Fiction,1994,Crime|Drama,8.9,"John Travolta, Uma Thurman",Povesti interconectate din lumea interlopa din Los Angeles
+6,The Dark Knight,2008,Action|Crime,9.0,"Christian Bale, Heath Ledger",Batman infrunta Jokerul care vrea sa arunce Gotham in haos
+7,Forrest Gump,1994,Drama|Romance,8.8,"Tom Hanks, Robin Wright",Viata extraordinara a unui om simplu care influenteaza istoria
+8,Fight Club,1999,Drama|Thriller,8.8,"Brad Pitt, Edward Norton",Un club secret de lupta devine o miscare anarhista
+9,The Shawshank Redemption,1994,Drama,9.3,"Tim Robbins, Morgan Freeman",Un bancher condamnat pe nedrept isi gaseste speranta in inchisoare
+10,Avengers: Endgame,2019,Action|Sci-Fi,8.4,"Robert Downey Jr., Chris Evans",Razbunatorii incearca sa inverseze actiunile lui Thanos
+11,Titanic,1997,Romance|Drama,7.9,"Leonardo DiCaprio, Kate Winslet",Poveste de dragoste la bordul vasului Titanic
+12,Avatar,2009,Sci-Fi|Adventure,7.9,"Sam Worthington, Zoe Saldana",Un fost marinar exploreaza planeta Pandora si tribul Na'vi
+13,Joker,2019,Crime|Drama,8.4,"Joaquin Phoenix, Robert De Niro",Originea clovnului criminal din Gotham
+14,Parasite,2019,Drama|Thriller,8.5,"Song Kang-ho, Lee Sun-kyun",O familie saraca se infiltreaza in casa unei familii bogate
+15,La La Land,2016,Romance|Musical,8.0,"Ryan Gosling, Emma Stone",Poveste de dragoste intre o actrita si un muzician in Los Angeles
+16,John Wick,2014,Action|Thriller,7.4,"Keanu Reeves, Michael Nyqvist",Un asasin pensionat se razbuna pentru cainele sau ucis
+17,Toy Story 4,2019,Animation|Adventure,7.7,"Tom Hanks, Tim Allen",Woody si Buzz pornesc intr-o noua aventura cu Forky
+18,The Lion King,1994,Animation|Drama,8.5,"Matthew Broderick, Jeremy Irons",Un pui de leu trebuie sa isi revendice tronul
+19,Dune,2021,Sci-Fi|Adventure,8.0,"Timothee Chalamet, Zendaya",Paul Atreides lupta pentru supravietuirea familiei pe Arrakis
+20,Barbie,2023,Comedy|Adventure,7.0,"Margot Robbie, Ryan Gosling",Barbie paraseste Barbieland pentru lumea reala
+21,Oppenheimer,2023,Drama|History,8.3,"Cillian Murphy, Emily Blunt",Povestea creatorului bombei atomice
+22,Spider-Man: Into the Spider-Verse,2018,Animation|Action,8.4,"Shameik Moore, Jake Johnson",Miles Morales descopera multiversul Spider-Man
+23,The Conjuring,2013,Horror|Thriller,7.5,"Patrick Wilson, Vera Farmiga",Investigatori paranormali ajuta o familie bantuita
+24,Knives Out,2019,Comedy|Crime,7.9,"Daniel Craig, Ana de Armas",Un detectiv investigheaza moartea unui scriitor bogat
+25,Soul,2020,Animation|Drama,8.0,"Jamie Foxx, Tina Fey",Un profesor de muzica calatoreste in lumea sufletelor
+26,Mad Max: Fury Road,2015,Action|Adventure,8.1,"Tom Hardy, Charlize Theron","Intr-o lume post-apocaliptica, Furiosa fuge de Immortan Joe"
+27,Whiplash,2014,Drama|Music,8.5,"Miles Teller, J.K. Simmons",Un baterist ambitios si profesorul sau abuziv
+28,Get Out,2017,Horror|Thriller,7.7,"Daniel Kaluuya, Allison Williams",Un tanar descopera secretul intunecat al familiei iubitei
+29,Frozen,2013,Animation|Adventure,7.4,"Kristen Bell, Idina Menzel",Doua surori regale si puterile magice de gheata
+30,Top Gun: Maverick,2022,Action|Drama,8.3,"Tom Cruise, Miles Teller",Pete Maverick antreneaza o noua generatie de piloti
