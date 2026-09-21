@@ -3,6 +3,18 @@ import numpy as np
 
 class MovieRecommender:
     def __init__(self, movies_path="data/movies.csv", ratings_path="data/users_ratings.csv"):
+        import os
+        # fallback: if data/ doesn't exist, look in current folder
+        if not os.path.exists(movies_path):
+            if os.path.exists("movies.csv"):
+                movies_path = "movies.csv"
+            elif os.path.exists("data/movies.csv"):
+                movies_path = "data/movies.csv"
+        if not os.path.exists(ratings_path):
+            if os.path.exists("users_ratings.csv"):
+                ratings_path = "users_ratings.csv"
+            elif os.path.exists("data/users_ratings.csv"):
+                ratings_path = "data/users_ratings.csv"
         self.movies = pd.read_csv(movies_path)
         self.ratings = pd.read_csv(ratings_path)
         self.movies['genres_list'] = self.movies['genres'].apply(lambda x: x.split('|'))
