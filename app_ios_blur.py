@@ -1,7 +1,7 @@
+
 import streamlit as st
 from recommender_simple import MovieRecommender
 import pandas as pd
-import numpy as np
 
 NUME_USERI = {
     "user_1": "Ana", "user_2": "Andrei", "user_3": "Maria", "user_4": "Mihai",
@@ -13,122 +13,37 @@ NUME_USERI = {
 NUME_TO_ID = {v: k for k, v in NUME_USERI.items()}
 
 st.set_page_config(page_title="CineMatch", page_icon="🎬", layout="wide")
-st.markdown("""
+st.markdown('''
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap');
-    .stApp { background: #FFF8F0; font-family: 'Outfit', sans-serif; }
-    div[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #ffe4cc; }
-    div[data-testid="stVerticalBlockBorderWrapper"] {
-        background: white !important; border-radius: 20px !important;
-        border: 1px solid #ffe4cc !important; box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
-    }
-    .stButton > button {
-        background: linear-gradient(135deg, #FF6B35, #F7931E) !important;
-        color: white !important; border: none !important; border-radius: 12px !important; font-weight: 600 !important;
-    }
-
-    /* ===== FOAIE CA PE IPHONE - EXACT CA IN POZA 2 ===== */
-    /* Overlay intunecat blur pe toata pagina cand se deschide lista */
-    div[data-baseweb="popover"] {
-        background: rgba(0,0,0,0.3) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        position: fixed !important;
-        inset: 0 !important;
-        display: flex !important;
-        align-items: flex-end !important;
-        justify-content: center !important;
-        padding: 0 0 20px 0 !important;
-        border: none !important;
-    }
-    /* Cardul propriu-zis - gri transparent rotunjit ca in poza 2 */
-    div[data-baseweb="popover"] > div {
-        background: rgba(55, 55, 55, 0.75) !important;
-        backdrop-filter: blur(40px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(40px) saturate(200%) !important;
-        border-radius: 32px !important;
-        border: 1px solid rgba(255,255,255,0.15) !important;
-        box-shadow: 0 20px 80px rgba(0,0,0,0.5) !important;
-        width: 92% !important;
-        max-width: 380px !important;
-        overflow: hidden !important;
-        margin: 0 auto !important;
-    }
-    ul[data-baseweb="menu"] {
-        background: transparent !important;
-        padding: 8px !important;
-    }
-    li[data-baseweb="menu-item"] {
-        background: rgba(255,255,255,0.08) !important;
-        color: white !important;
-        border-radius: 14px !important;
-        margin: 6px 6px !important;
-        padding: 14px 16px !important;
-        text-align: center !important;
-        justify-content: center !important;
-        font-size: 16px !important;
-        font-weight: 500 !important;
-        backdrop-filter: blur(10px) !important;
-        border: 0.5px solid rgba(255,255,255,0.1) !important;
-    }
-    li[data-baseweb="menu-item"]:hover {
-        background: rgba(255,255,255,0.15) !important;
-    }
-    li[aria-selected="true"] {
-        background: rgba(255,255,255,0.22) !important;
-        font-weight: 700 !important;
-    }
-    /* Linia de separare ca pe iOS */
-    li[data-baseweb="menu-item"] + li[data-baseweb="menu-item"] {
-        border-top: 1px solid rgba(255,255,255,0.08) !important;
-    }
-
-    /* Selectbox inchis - sticla alba */
-    div[data-baseweb="select"] > div {
-        background: rgba(255, 255, 255, 0.85) !important;
-        backdrop-filter: blur(10px) !important;
-        border-radius: 14px !important;
-    }
-
-    /* DIALOG-UL DE FILM - tot ca iOS, blur dark */
-    div[data-testid="stDialog"] {
-        background: rgba(0,0,0,0.45) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-    }
-    div[data-testid="stDialog"] > div > div > div {
-        background: rgba(45, 45, 45, 0.78) !important;
-        backdrop-filter: blur(40px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
-        border-radius: 28px !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        color: white !important;
-    }
-    div[data-testid="stDialog"] * {
-        color: white !important;
-    }
-    div[data-testid="stDialog"] button {
-        background: rgba(255,255,255,0.12) !important;
-        border-top: 1px solid rgba(255,255,255,0.1) !important;
-    }
+.stApp { background: #FFF8F0; }
+div[data-testid="stSidebar"] { background: #ffffff; border-right: 1px solid #ffe4cc; }
+.stButton > button {
+    background: linear-gradient(135deg, #FF6B35, #F7931E) !important;
+    color: white !important; border-radius: 12px !important; font-weight:600 !important; border:none !important;
+}
+div[data-testid="stDialog"] { background: rgba(0,0,0,0.35) !important; backdrop-filter: blur(12px) !important; }
+div[data-testid="stDialog"] > div > div { background: #2b2b2b !important; border-radius:24px !important; color:white !important; }
+div[data-testid="stDialog"] * { color:white !important; }
 </style>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
 @st.cache_resource
 def load_rec():
     return MovieRecommender()
+
 rec = load_rec()
 
 def get_col(df, names):
     for n in names:
-        if n in df.columns: return n
-    return None
-title_col = get_col(rec.movies, ['title','titlu'])
-year_col = get_col(rec.movies, ['year','an'])
-genre_col = get_col(rec.movies, ['genres','gen'])
-rating_col = get_col(rec.movies, ['rating','rating_imdb','imdb'])
-desc_col = get_col(rec.movies, ['description','overview','plot','descriere'])
-actors_col = get_col(rec.movies, ['actors','actori'])
+        if n in df.columns:
+            return n
+    return df.columns[0] if len(df.columns)>0 else None
+
+title_col = get_col(rec.movies, ['title','titlu','Title'])
+year_col = get_col(rec.movies, ['year','an','Year'])
+genre_col = get_col(rec.movies, ['genres','gen','Genuri'])
+rating_col = get_col(rec.movies, ['rating','rating_imdb','Rating'])
+desc_col = get_col(rec.movies, ['description','descriere','plot','overview'])
 
 if 'favorites' not in st.session_state:
     st.session_state.favorites = []
@@ -144,22 +59,27 @@ def toggle_favorite(row):
         st.session_state.favorites.append(mid)
         st.session_state.fav_details[mid] = row.to_dict()
 
-@st.dialog("🎬 Detalii", width="large")
+@st.dialog("🎬 Detalii film")
 def show_details(row):
-    t = row.get(title_col, 'Film')
-    y = row.get(year_col, '')
+    t = str(row.get(title_col, 'Film'))
+    y = str(row.get(year_col, ''))
     g = str(row.get(genre_col, ''))
-    r = row.get(rating_col, '')
+    r = str(row.get(rating_col, ''))
+    d = str(row.get(desc_col, '')) if desc_col else ''
     s = row.get('similarity', 0)
     mid = int(row['movie_id'])
-    is_fav = mid in st.session_state.favorites
-    st.markdown(f"## {t} ({y})")
-    st.write(f"⭐ {r}/10 • {g} • 💘 {s*100:.0f}%" if s else f"⭐ {r}/10 • {g}")
+    st.markdown(f"### {t} ({y})")
+    st.write(f"⭐ {r}/10 • {g}")
+    if s:
+        st.write(f"💘 Potrivire: {s*100:.0f}%")
     st.divider()
-    if st.button("❤️ Adaugă / 💔 Scoate", use_container_width=True):
-        toggle_favorite(row); st.rerun()
+    if d and d != 'nan':
+        st.write(d)
+    if st.button("❤️ / 💔 Favorite", use_container_width=True, key=f"dlg_{mid}"):
+        toggle_favorite(row)
+        st.rerun()
 
-st.markdown("<div style='text-align:center'><h1>🎬 CineMatch</h1><p>colecția ta de filme</p></div>", unsafe_allow_html=True)
+st.markdown("<div style='text-align:center'><h1>🎬 CineMatch</h1><p>colecția ta de filme - alege un utilizator și generează recomandări</p></div>", unsafe_allow_html=True)
 
 tab_col, tab_fav, tab_eval = st.tabs([f"🍿 Colecție", f"❤️ Favorite ({len(st.session_state.favorites)})", "📊 Grafice"])
 
@@ -182,28 +102,32 @@ with st.sidebar:
     gen_btn = st.button("✨ Generează recomandări", type="primary", use_container_width=True)
 
 def display_grid(df, show_score=True, prefix="col"):
+    if df.empty:
+        st.info("Nu sunt filme aici")
+        return
     cols = st.columns(3)
     for idx, (_, row) in enumerate(df.iterrows()):
         with cols[idx % 3]:
             with st.container(border=True):
-                t = row.get(title_col, 'Film')
-                y = row.get(year_col, '')
+                t = str(row.get(title_col, 'Film'))
+                y = str(row.get(year_col, ''))
                 g = str(row.get(genre_col, ''))
-                r = row.get(rating_col, '')
+                r = str(row.get(rating_col, ''))
                 s = row.get('similarity', 0)
                 mid = int(row['movie_id'])
                 is_fav = mid in st.session_state.favorites
                 st.markdown(f"#### {t}{' ❤️' if is_fav else ''}")
-                st.caption(f"{y} • ⭐ {r}")
+                st.caption(f"{y} • ⭐ {r} • {g[:30]}")
                 if show_score and s:
-                    st.progress(float(s), text=f"{s*100:.0f}%")
+                    st.progress(float(s), text=f"{s*100:.0f}% potrivire")
                 c1,c2 = st.columns(2)
                 with c1:
                     if st.button("📖 Detalii", key=f"{prefix}_det_{mid}_{idx}", use_container_width=True):
                         show_details(row)
                 with c2:
                     if st.button("❤️" if not is_fav else "💔", key=f"{prefix}_fav_{mid}_{idx}", use_container_width=True):
-                        toggle_favorite(row); st.rerun()
+                        toggle_favorite(row)
+                        st.rerun()
 
 with tab_col:
     if not gen_btn:
@@ -213,15 +137,17 @@ with tab_col:
         elif "Cosine" in algo: res = rec.recommend_cosine(user_id_for_rec, profile, n_rec)
         elif "K-Means" in algo: res = rec.recommend_kmeans(user_id_for_rec, profile, n_rec)
         else: res = rec.recommend_hybrid(user_id_for_rec, profile, n_rec)
-        st.subheader(f"Pentru {user_nume}")
+        st.subheader(f"Pentru {user_nume} - {algo}")
         display_grid(res, show_score=True, prefix="rec")
 
 with tab_fav:
     if not st.session_state.favorites:
-        st.info("Nu ai favorite")
+        st.info("Nu ai favorite încă - apasă ❤️ la filme")
     else:
         fav_rows = [st.session_state.fav_details[mid] for mid in st.session_state.favorites if mid in st.session_state.fav_details]
         display_grid(pd.DataFrame(fav_rows), show_score=False, prefix="fav")
 
 with tab_eval:
+    st.markdown("### 📊 Performanța algoritmilor")
     st.bar_chart(pd.DataFrame([{"Algoritm":"KNN","RMSE":1.12},{"Algoritm":"Cosine","RMSE":0.95},{"Algoritm":"K-Means","RMSE":1.25},{"Algoritm":"Hibrid","RMSE":0.82}]).set_index("Algoritm"))
+    st.success("✅ Link-ul tău public: https://cinema-xs7hxjprrzenmil9xaotun.streamlit.app - trimite-l prietenului!")
